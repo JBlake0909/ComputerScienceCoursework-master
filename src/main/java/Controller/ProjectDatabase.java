@@ -2,6 +2,7 @@ package Controller;
 
 import Server.Main;
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
@@ -165,6 +166,24 @@ public class ProjectDatabase {
         }
     }
 
+    public static void getPosts(int PostID){
+        try {
+            PreparedStatement ps = Main.db.prepareStatement("select PostID, Type, FileReference, DateAdded, UserID from posts where PostID = " + PostID)
+            ResultSet results = (ps).executeQuery();
+            while (results.next()) {
+                PostID = results.getInt(1);
+                String PostId = results.getString(2);
+                String FileReference = results.getString(3);
+                Date DateAdded = results.getDate(4);
+                int UserID = results.getInt(5);
+            }
+        }
+        catch (Exception exception) {
+                System.out.println("Database error: " + exception.getMessage());
+            }
+
+        }
+
 //-------------------------------------------------------------------------------------------------------------------//
 
     public static void createUser(String username,String password){
@@ -275,36 +294,6 @@ public class ProjectDatabase {
             System.out.println("Database error: " + exception.getMessage());
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
