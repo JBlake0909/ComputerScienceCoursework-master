@@ -168,7 +168,7 @@ public class ProjectDatabase {
 
     public static void getPosts(int PostID){
         try {
-            PreparedStatement ps = Main.db.prepareStatement("select PostID, Type, FileReference, DateAdded, UserID from posts where PostID = " + PostID)
+            PreparedStatement ps = Main.db.prepareStatement("select PostID, Type, FileReference, DateAdded, UserID from posts where PostID = " + PostID);
             ResultSet results = (ps).executeQuery();
             while (results.next()) {
                 PostID = results.getInt(1);
