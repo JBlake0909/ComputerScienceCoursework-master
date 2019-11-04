@@ -1,7 +1,7 @@
-package Controller;
+package Controllers;
 
 import Server.Main;
-import com.sun.jersey.multipart.FormDataParam;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -16,9 +16,9 @@ public class SocialLink {
 
     //------------------------------------------Gets all social Links from an inputted UserID------------------------//
     @GET
-    @Path("get")
+    @Path("get/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getSocialLinks(int UserID) {
+    public String getSocialLinks(@PathParam("id") int UserID) {
         System.out.println("SocialLink/get");
         JSONArray list = new JSONArray();
         try {

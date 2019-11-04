@@ -1,7 +1,7 @@
-package Controller;
+package Controllers;
 
 import Server.Main;
-import com.sun.jersey.multipart.FormDataParam;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -15,9 +15,9 @@ public class User {
 
     //---------Gets information about the inputted UserID for Display Purposes----------------------------------------//
     @GET
-    @Path("display")
+    @Path("display/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getUserInfo(int UserID) {
+    public String getUserInfo( @PathParam("id") int UserID) {
         System.out.println("user/display");
         JSONArray list = new JSONArray();
         try {
@@ -123,9 +123,9 @@ public class User {
 
     // get following/update following---------------------------------------------------------------------------------//
     @GET
-    @Path("getFollowing")
+    @Path("getFollowing/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getFollowing(int UserID) {
+    public String getFollowing(@PathParam("id") int UserID) {
         System.out.println("User/getFollowing");
         JSONArray list = new JSONArray();
         try {
@@ -156,9 +156,9 @@ public class User {
 
     // get followers/update followers---------------------------------------------------------------------------------//
     @GET
-    @Path("getFollowers")
+    @Path("getFollowers/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getFollowers(int followID) {
+    public String getFollowers(@PathParam("id")int followID) {
         System.out.println("User/getFollowers");
         JSONArray list = new JSONArray();
         try {
