@@ -70,9 +70,9 @@ public class Post {
 
     // get post (based on postID)//-------------------------------------------------------------------------------------
     @GET
-    @Path("get")
+    @Path("get/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getPost(int PostID) {
+    public String getPost(@PathParam("id")int PostID) {
         System.out.println("post/get");
         JSONArray list = new JSONArray();
         try {

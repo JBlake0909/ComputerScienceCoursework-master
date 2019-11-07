@@ -15,9 +15,9 @@ public class Genre {
 
     //----------------------------------------Gets Genres from the inputted UserID-----------------------------------//
     @GET
-    @Path("get")
+    @Path("getByID/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getGenre(int UserID) {
+    public String getGenre(@PathParam("id")int UserID) {
         System.out.println("Genre/get");
         JSONArray list = new JSONArray();
         try {
@@ -88,9 +88,9 @@ public class Genre {
 
     // select userID based on genre //
     @GET
-    @Path("get")
+    @Path("getByGen/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String filterByGenre(String Genre) {
+    public String filterByGenre(@PathParam("id")String Genre) {
         System.out.println("Genre/filter");
         JSONArray list = new JSONArray();
         try {

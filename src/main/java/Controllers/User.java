@@ -190,8 +190,9 @@ public class User {
     //login//
     @GET
     @Path("login")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String Login(String Username, String Password) {
+    public String Login(@FormDataParam("username") String Username,  @FormDataParam("password") String Password) {
         System.out.println("user/login");
         JSONArray list = new JSONArray();
         int UserID = -1;

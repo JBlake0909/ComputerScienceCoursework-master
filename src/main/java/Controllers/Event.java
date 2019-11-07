@@ -67,9 +67,9 @@ public class Event {
     }
     // Get event (based on eventID //
     @GET
-    @Path("get")
+    @Path("get/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getEvent(int EventID) {
+    public String getEvent(@PathParam("id")int EventID) {
         System.out.println("post/get");
         JSONArray list = new JSONArray();
         try {
