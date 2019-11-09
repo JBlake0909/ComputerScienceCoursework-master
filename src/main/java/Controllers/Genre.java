@@ -18,7 +18,7 @@ public class Genre {
     @Path("getByID/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public String getGenre(@PathParam("id")int UserID) {
-        System.out.println("Genre/get");
+        System.out.println("Genre/getById");
         JSONArray list = new JSONArray();
         try {
             PreparedStatement ps = Main.db.prepareStatement("select GenreID, UserID, Genre from Genres where UserID = " +UserID);

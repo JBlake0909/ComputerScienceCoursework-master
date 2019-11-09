@@ -28,7 +28,7 @@ public class User {
                 item.put("UserID", results.getInt(1));
                 item.put("firstName", results.getString(2));
                 item.put("lastName", results.getString(3));
-                item.put("DateJoined", results.getDate(4));
+                item.put("DateJoined", results.getString(4));
                 item.put("Followers", results.getInt(5));
                 item.put("Following", results.getInt(6));
                 item.put("Email", results.getString(7));
@@ -139,14 +139,6 @@ public class User {
                 list.add(item);
                 following++;
             }
-                try {
-                    Main.db.prepareStatement("UPDATE Information SET Following = ? WHERE UserID ="+UserID);
-                    ps.setInt(1, following);
-                    ps.execute();
-                } catch (Exception exception) {
-                    System.out.println("Database error: " + exception.getMessage());
-                    return "{\"error\": \"Unable to list items, please see server console for more info.\"}";
-                }
             return list.toString();
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
@@ -171,14 +163,6 @@ public class User {
                 item.put("userID", results.getInt(1));
                 list.add(item);
                 followers++;
-            }
-            try {
-                Main.db.prepareStatement("UPDATE Information SET Followers = ? WHERE UserID ="+followID);
-                ps.setInt(1, followers);
-                ps.execute();
-            } catch (Exception exception) {
-                System.out.println("Database error: " + exception.getMessage());
-                return "{\"error\": \"Unable to list items, please see server console for more info.\"}";
             }
             return list.toString();
         } catch (Exception exception) {
