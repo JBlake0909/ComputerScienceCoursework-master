@@ -84,7 +84,7 @@ public class Post {
                 item.put("PostID", results.getInt(1));
                 item.put("Type", results.getString(2));
                 item.put("FileReference", results.getString(3));
-                item.put("DateAdded", results.getDate(4));
+                item.put("DateAdded", results.getString(4));
                 item.put("UserID", results.getInt(5));
                 item.put("Caption", results.getString(6));
                 list.add(item);

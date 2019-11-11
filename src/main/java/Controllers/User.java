@@ -1,6 +1,7 @@
 package Controllers;
 
 import Server.Main;
+
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -172,18 +173,19 @@ public class User {
     }
 
     //login//
-    @GET
+    @POST
     @Path("login")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String Login(@FormDataParam("username") String Username,  @FormDataParam("password") String Password) {
-        System.out.println("user/login");
+    public String Login(@FormDataParam("Username") String Username,  @FormDataParam("Password") String Password) {
+        System.out.println("user/login "+Username);
         JSONArray list = new JSONArray();
         int UserID = -1;
         String gUsername = null;
         String gPassword = null;
         try {
-            PreparedStatement ps = Main.db.prepareStatement("SELECT UserID, Username, Password, FROM Passwords WHERE Username =" +Username);
+            PreparedStatement ps = Main.db.prepareStatement("SELECT UserID, Username, Password FROM Passwords WHERE Username = ?");
+            ps.setString(1,Username);
             ResultSet results = ps.executeQuery();
 
             while (results.next()) {

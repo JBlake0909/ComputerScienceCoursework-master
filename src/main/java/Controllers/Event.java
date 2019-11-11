@@ -70,7 +70,7 @@ public class Event {
     @Path("get/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public String getEvent(@PathParam("id")int EventID) {
-        System.out.println("post/get");
+        System.out.println("event/get");
         JSONArray list = new JSONArray();
         try {
             PreparedStatement ps = Main.db.prepareStatement("select EventID, Title, Description, ImageReference, UserID from Events where EventID = "+EventID);
