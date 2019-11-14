@@ -179,7 +179,7 @@ public class User {
     @Produces(MediaType.APPLICATION_JSON)
     public String Login(@FormDataParam("Username") String Username,  @FormDataParam("Password") String Password) {
         System.out.println("user/login "+Username);
-        JSONArray list = new JSONArray();
+        System.out.println(Password);
         int UserID = -1;
         String gUsername = null;
         String gPassword = null;
@@ -189,11 +189,12 @@ public class User {
             ResultSet results = ps.executeQuery();
 
             while (results.next()) {
-                JSONObject item = new JSONObject();
                 UserID = results.getInt(1);
                 gUsername = results.getString(2);
                 gPassword = results.getString(3);
             }
+            System.out.println(gUsername);
+            System.out.println(gPassword);
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
             return "{\"error\": \"Unable to list items, please see server console for more info.\"}";
@@ -201,11 +202,11 @@ public class User {
         if(gUsername == null){
             return "error Username does not exist";
         }
-        else if (gPassword != Password){
-            return "error Password is incorrect";
+        else if (gPassword.equals(Password)){
+            return ""+UserID;
         }
         else{
-            return (""+UserID);
+            return ("error Password is incorrect");
         }
     }
 
