@@ -56,7 +56,7 @@ public class User {
             }
             System.out.println("user/update id=" + UserID);
 
-            PreparedStatement ps = Main.db.prepareStatement("UPDATE information SET FirstName = ? LastName = ? Bio = ? Email = ? WHERE UserID = ?");
+            PreparedStatement ps = Main.db.prepareStatement("UPDATE information SET FirstName = ?, LastName = ?, Bio = ?, Email = ? WHERE UserID = ?");
             ps.setString(1, FirstName);
             ps.setString(2, LastName);
             ps.setString(3, Bio);
@@ -179,35 +179,36 @@ public class User {
     @Produces(MediaType.APPLICATION_JSON)
     public String Login(@FormDataParam("Username") String Username,  @FormDataParam("Password") String Password) {
         System.out.println("user/login "+Username);
-        System.out.println(Password);
-        int UserID = -1;
-        String gUsername = null;
-        String gPassword = null;
+        System.out.println("inputted Password: " +Password);
+        int UserID ;
+        String gUsername;
+        String gPassword;
         try {
             PreparedStatement ps = Main.db.prepareStatement("SELECT UserID, Username, Password FROM Passwords WHERE Username = ?");
             ps.setString(1,Username);
             ResultSet results = ps.executeQuery();
-
-            while (results.next()) {
+               // Setting up Passwords as Strings //
                 UserID = results.getInt(1);
                 gUsername = results.getString(2);
                 gPassword = results.getString(3);
-            }
-            System.out.println(gUsername);
-            System.out.println(gPassword);
+                //-----------------------------------------------//
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
             return "{\"error\": \"Unable to list items, please see server console for more info.\"}";
         }
+        // trimming Passwords to prevent input and database errors
+        gPassword = gPassword.trim();
+        Password = Password.trim();
         if(gUsername == null){
             return "error Username does not exist";
         }
         else if (gPassword.equals(Password)){
             return ""+UserID;
         }
-        else{
+        else if (!gPassword.equals(Password)){
             return ("error Password is incorrect");
         }
+        return "error";
     }
 
     //create username/ password//
