@@ -10,6 +10,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Path("user/")
 public class User {
@@ -103,15 +106,16 @@ public class User {
     @Path("unFollow")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String unfollow(@FormDataParam("FollowID") Integer followID) {
+    public String unFollow(@FormDataParam("FollowID") Integer FollowID, @FormDataParam("UserID") Integer UserID) {
 
         try {
-            if (followID == null) {
+            if (FollowID == null || UserID == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
-            System.out.println("thing/delete id=" + followID);
-            PreparedStatement ps = Main.db.prepareStatement("DELETE FROM FollowTable WHERE followID = "+followID);
-            ps.setInt(1, followID);
+            System.out.println("thing/delete id=" + FollowID);
+            PreparedStatement ps = Main.db.prepareStatement("DELETE FROM FollowTable WHERE UserID = ? AND FollowID = ?");
+            ps.setInt(1, UserID);
+            ps.setInt(2, FollowID);
             ps.execute();
             return "{\"status\": \"OK\"}";
 
@@ -224,10 +228,26 @@ public class User {
             }
             System.out.println("user/create username=" + Username);
 
-            PreparedStatement ps = Main.db.prepareStatement("Insert Into Passwords (username, password) Values (?, ?)");
+            PreparedStatement ps = Main.db.prepareStatement("Insert Into Passwords (username, password) Values (?, ?)", Statement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, Username);
             ps.setString(2, Password);
+            ps.execute();
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            int UserID = rs.getInt(1);
+            ps = Main.db.prepareStatement("INSERT INTO Information (UserID, firstName, lastName, DateJoined, Followers, Following, Email, Bio ) Values (?,?,?,?,?,?,?,?) ");
+            ps.setInt(1, UserID);
+            ps.setString(2, null);
+            ps.setString(3, null);
+            Date currentDate = new Date();
+            SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+            String currentDateString = formatter.format(currentDate);
+            ps.setString(4, currentDateString);
+            ps.setInt(5, 0);
+            ps.setInt(6, 0);
+            ps.setString(7, null);
+            ps.setString(8, null);
             ps.execute();
             return "{\"status\": \"OK\"}";
 
