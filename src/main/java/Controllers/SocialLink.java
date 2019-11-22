@@ -69,7 +69,7 @@ public class SocialLink {
     @Path("delete")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String deleteThing(@FormDataParam("LinkId") Integer LinkID) {
+    public String deleteThing(@FormDataParam("LinkID") Integer LinkID) {
 
         try {
             if (LinkID == null) {
@@ -77,7 +77,7 @@ public class SocialLink {
             }
             System.out.println("SocialLink/delete id=" + LinkID);
 
-            PreparedStatement ps = Main.db.prepareStatement("DELETE FROM SocialLinks WHERE LinkID = " + LinkID);
+            PreparedStatement ps = Main.db.prepareStatement("DELETE FROM SocialLinks WHERE LinkID = " +LinkID);
             ps.execute();
             return "{\"status\": \"OK\"}";
 

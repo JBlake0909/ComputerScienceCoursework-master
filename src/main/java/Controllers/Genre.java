@@ -50,7 +50,7 @@ public class Genre {
             }
             System.out.println("Genre/Create id=" + UserID);
 
-            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Genres (UserID, Genre, Description) VALUES (?, ?)");
+            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Genres (UserID, Genre) VALUES (?, ?)");
             ps.setInt(1, UserID);
             ps.setString(2, Genre);
             ps.execute();
@@ -73,7 +73,7 @@ public class Genre {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
             System.out.println("thing/delete id=" + GenreID);
-            PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Genres WHERE GenreID = "+GenreID);
+            PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Genres WHERE GenreID = ?");
             ps.setInt(1, GenreID);
             ps.execute();
 

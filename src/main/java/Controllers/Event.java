@@ -53,8 +53,8 @@ public class Event {
             if (EventID == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
-            System.out.println("post/delete id=" + EventID);
-            PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Events WHERE followID = "+EventID);
+            System.out.println("Event/delete id=" + EventID);
+            PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Events WHERE EventID = ?");
             ps.setInt(1, EventID);
             ps.execute();
 
