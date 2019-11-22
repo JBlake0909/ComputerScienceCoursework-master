@@ -20,7 +20,7 @@ public class Post {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String createPost(
-            @FormDataParam("UserID") Integer UserID, @FormDataParam("Type") String Type, @FormDataParam("FileReference") String FileReference, @FormDataParam("DateAdded") Date DateAdded,@FormDataParam("Caption") String Caption) {
+            @FormDataParam("UserID") Integer UserID, @FormDataParam("Type") String Type, @FormDataParam("FileReference") String FileReference, @FormDataParam("DateAdded") String DateAdded,@FormDataParam("Caption") String Caption) {
         try {
             if (UserID == null ||Type == null ||FileReference == null ||DateAdded == null  ) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
@@ -31,7 +31,7 @@ public class Post {
             ps.setInt(1, UserID);
             ps.setString(2, Type);
             ps.setString(3, FileReference);
-            ps.setDate(4, DateAdded);
+            ps.setString(4, DateAdded);
             ps.setString(5, Caption);
             ps.execute();
 
@@ -56,7 +56,7 @@ public class Post {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
             System.out.println("post/delete id=" + PostID);
-            PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Posts WHERE followID = " +PostID);
+            PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Posts WHERE PostID = ?");
             ps.setInt(1, PostID);
             ps.execute();
             return "{\"status\": \"OK\"}";

@@ -250,7 +250,7 @@ public class User {
             }
             System.out.println("user/updatePassword id=" + UserID);
 
-            PreparedStatement ps = Main.db.prepareStatement("UPDATE Passwords SET Password = ? WHERE Id = ?");
+            PreparedStatement ps = Main.db.prepareStatement("UPDATE Passwords SET Password = ? WHERE UserID = ?");
             ps.setString(1, Password);
             ps.setInt(2, UserID);
             ps.execute();
