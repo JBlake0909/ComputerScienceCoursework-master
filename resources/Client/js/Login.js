@@ -1,7 +1,9 @@
 window.onload=function(){
     document.getElementById("loginButton").addEventListener("click", login);
+    document.getElementById("SignUp").addEventListener("click", signUp)
 };
-function login() {
+function login(event) {
+    event.preventDefault()
     const form = document.getElementById("loginForm");
     const formData = new FormData(form);
     fetch("/user/login", {method: 'post', body: formData}
@@ -10,9 +12,12 @@ function login() {
         if (responseData.hasOwnProperty('error')) {
             alert(responseData.error);
         } else {
-            alert(responseData.string());
-            window.location.href = '/client/index.html';
+            alert(responseData);
+            window.location.href = '/Client/profile.html';
         }
     });
     alert("end");
+}
+function signUp(){
+    window.location.href = 'SignUp.html';
 }
