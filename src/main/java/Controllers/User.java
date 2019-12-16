@@ -181,7 +181,7 @@ public class User {
     @Path("login")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String Login(@FormDataParam("Username") String Username,  @FormDataParam("Password") String Password) {
+    public String Login(@FormDataParam("username") String Username,  @FormDataParam("password") String Password) {
         System.out.println("user/login "+Username);
         System.out.println("inputted Password: " +Password);
         int UserID ;
@@ -191,11 +191,17 @@ public class User {
             PreparedStatement ps = Main.db.prepareStatement("SELECT UserID, Username, Password FROM Passwords WHERE Username = ?");
             ps.setString(1,Username);
             ResultSet results = ps.executeQuery();
+            if(results==null){
+                System.out.println("No results to show");
+            }else{
+                return "{\"error\": \"User account does not exist\"}";
+            }
                // Setting up Passwords as Strings //
                 UserID = results.getInt(1);
                 gUsername = results.getString(2);
                 gPassword = results.getString(3);
                 //-----------------------------------------------//
+            System.out.println(gPassword);
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
             return "{\"error\": \"Unable to list items, please see server console for more info.\"}";

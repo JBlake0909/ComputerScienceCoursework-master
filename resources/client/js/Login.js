@@ -4,7 +4,7 @@ window.onload=function(){
 };
 function login(event) {
     event.preventDefault();
-    const form = document.getElementById("loginForm");
+    const form = document.getElementById( "loginForm");
     const formData = new FormData(form);
     fetch("/user/login", {method: 'post', body: formData}
     ).then(response => response.json()
@@ -16,7 +16,6 @@ function login(event) {
             window.location.href = 'profile.html';
         }
     });
-    alert("end");
 }
 function signUp(){
     window.location.href = 'SignUp.html';
