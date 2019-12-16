@@ -1,0 +1,22 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 2fr ;
+    grid-template-rows: 0.5fr 1.7fr;
+    grid-template-areas: "Title" "SignUp";
+    background-color: #2196F3;
+    padding: 10px;
+}
+
+.Title { grid-area: Title;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;}
+
+.SignUp { grid-area: SignUp;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;}
