@@ -184,41 +184,27 @@ public class User {
     public String Login(@FormDataParam("username") String Username,  @FormDataParam("password") String Password) {
         System.out.println("user/login "+Username);
         System.out.println("inputted Password: " +Password);
-        int UserID ;
-        String gUsername;
-        String gPassword;
+        JSONObject item = new JSONObject();
         try {
             PreparedStatement ps = Main.db.prepareStatement("SELECT UserID, Username, Password FROM Passwords WHERE Username = ?");
             ps.setString(1,Username);
             ResultSet results = ps.executeQuery();
-            if(results==null){
-                System.out.println("No results to show");
+            if(results!=null && results.next()){
+                if(Password.equals(results.getString(3))){
+                    item.put("userID", results.getInt(1));
+                    return item.toString();
+                    //return "{\"Success\": \"User account found\"}" ;
+                }else{
+                    return "{\"error\": \"Password does not match the user account\"}";
+                }
             }else{
                 return "{\"error\": \"User account does not exist\"}";
             }
-               // Setting up Passwords as Strings //
-                UserID = results.getInt(1);
-                gUsername = results.getString(2);
-                gPassword = results.getString(3);
-                //-----------------------------------------------//
-            System.out.println(gPassword);
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
             return "{\"error\": \"Unable to list items, please see server console for more info.\"}";
         }
-        // trimming Passwords to prevent input and database errors
-        gPassword = gPassword.trim();
-        Password = Password.trim();
-        if(gUsername == null){
-            return "error Username does not exist";
-        }
-        else if (gPassword.equals(Password)){
-            return ""+UserID;
-        }
-        else if (!gPassword.equals(Password)){
-            return ("error Password is incorrect");
-        }
-        return "error";
+
     }
 
     //create username/ password//
