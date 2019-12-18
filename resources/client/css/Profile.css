@@ -1,0 +1,48 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 0.6fr 1fr 1.9fr;
+    grid-template-rows: 0.2fr 1.6fr;
+    grid-template-areas: "Banner Banner Banner" "Socials Profile Posts";
+    background-color: #2196F3;
+    padding: 10px;
+}
+
+.Banner { grid-area: Banner;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: left;}
+    a:link {
+        color: Black;
+    }
+
+
+    a:visited {
+        color: Black;
+    }
+
+    a:hover {
+        color: Blue;
+    }
+
+.Socials { grid-area: Socials;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;}
+
+.Profile { grid-area: Profile;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;}
+
+.Posts { grid-area: Posts;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;}
