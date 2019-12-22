@@ -12,7 +12,8 @@ function login(event) {
         if (responseData.hasOwnProperty('error')) {
             alert(responseData.error);
         } else {
-            alert(responseData);
+            alert(JSON.stringify(responseData));
+            window.sessionStorage.user = JSON.stringify(responseData);
             window.location.href = 'profile.html';
         }
     });

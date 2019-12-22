@@ -1,20 +1,22 @@
 
-function pageLoad(event){
-    const id = event.target.getAttribute("data-id");
+function pageLoad(){
+    //const id = JSON.stringify(JSON.parse(window.sessionStorage.user));
+    //alert(id);
+    let id = 1;
     let profileHTML = '<table>'
         + '<tr>'
     + '<th>Name</th>' + '<th>DateJoined</th>' + '<th>Followers</th>' + '<th>Following</th>'+ '<th>Bio</th>'+
         '</tr>';
-    fetch('/user/display' +id , {method: 'get'}
+    fetch('/user/display/' +id , {method: 'get'}
     ).then(response => response.json()
-    ).then(datas => {
-        for (let data of datas) {
+    ).then(users => {
+        for (let user of users) {
             profileHTML += `<tr>` +
-                `<td>${data.name}</td>` +
-                `<td>${data.name}</td>` +
-                `<td>${data.id}</td>` +
-                `<td>${data.id}</td>` +
-                `<td>${data.name}</td>`
+                `<td>${user.firstName}</td>` +
+                `<td>${user.DateJoined}</td>` +
+                `<td>${user.Followers}</td>` +
+                `<td>${user.Following}</td>` +
+                `<td>${user.Bio}</td>`
         }
         profileHTML += '</table>';
 
