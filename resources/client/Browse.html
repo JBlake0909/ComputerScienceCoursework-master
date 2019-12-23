@@ -3,8 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/Browse.css">
+    <script src="js/Browse.js"></script>
 </head>
 <body>
 
+    <div class="grid-container">
+        <div class="Banner">
+            <a href="Feed.html">
+                Feed
+
+            </a>
+            -
+            <a href="Followers.html">
+                Followers
+            </a>
+            -
+            <a href="Followers.html">
+                Following
+            </a>
+            -
+            <a href="Events.html">
+                Events
+            </a>
+            -
+            <a href="Profile.html">
+                Profile
+            </a>
+            -
+            <a href="Create.html">
+                Upload
+            </a>
+        </div>
+
+        <div class="Search-Box">
+            <form id="SearchGenresForm">
+                <div class="searchDiv">
+                    <label for="genres">Search By Genres:</label>
+                    <input type="text" name="genres" id="genres">
+                    <button class="searchDiv"
+                         type="submit" value="search" id="GenSearchButton">Search
+                    </button>
+                </div>
+            </form>
+
+            <form id="SearchUsersForm">
+                <div class="searchDiv">
+                    <label for="users">Search By Name:</label>
+                    <input type="text" name="users" id="users">
+                    <button class="searchDiv"
+                            type="submit" value="search" id="UserSearchButton">Search
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="Results">
+
+        </div>
+    </div>
 </body>
 </html>

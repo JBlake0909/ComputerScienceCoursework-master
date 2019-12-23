@@ -1,0 +1,40 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 0.6fr 1.9fr;
+    grid-template-areas: "Banner" "Search-Box" "Results";
+    background-color: #2196F3;
+    padding: 10px;
+}
+
+.Banner { grid-area: Banner;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: left;}
+a:link {
+    color: Black;
+}
+a:visited {
+    color: Black;
+}
+
+a:hover {
+    color: Blue;
+}
+.Search-Box { grid-area: Search-Box;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.Results { grid-area: Results;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+}
