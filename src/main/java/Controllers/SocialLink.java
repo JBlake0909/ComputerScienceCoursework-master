@@ -26,7 +26,7 @@ public class SocialLink {
             ResultSet results = (ps).executeQuery();
             while (results.next()) {
                 JSONObject item = new JSONObject();
-                item.put("Linkid", results.getInt(1));
+                item.put("LinkID", results.getInt(1));
                 item.put("Link", results.getString(2));
                 item.put("UserID", results.getInt(3));
                 list.add(item);

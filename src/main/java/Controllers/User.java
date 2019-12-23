@@ -52,7 +52,7 @@ public class User {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String updateInformation(
-            @FormDataParam("UserID") Integer UserID, @FormDataParam("FirstName") String FirstName, @FormDataParam("LastName") String LastName, @FormDataParam("Bio") String Bio, @FormDataParam("Email") String Email) {
+             @FormDataParam("FirstName") String FirstName, @FormDataParam("LastName") String LastName, @FormDataParam("Bio") String Bio, @FormDataParam("Email") String Email, @FormDataParam("UserID") Integer UserID) {
         try {
             if (UserID == null || FirstName == null || LastName == null || Bio == null || Email == null ) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");

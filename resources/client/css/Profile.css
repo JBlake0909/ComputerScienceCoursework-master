@@ -31,7 +31,7 @@
     border: 1px solid rgba(0, 0, 0, 0.8);
     padding: 20px;
     font-size: 30px;
-    text-align: center;}
+    text-align: left;}
 
 .Profile { grid-area: Profile;
     background-color: rgba(255, 255, 255, 0.8);
