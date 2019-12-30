@@ -44,24 +44,22 @@ function pageLoad(){
 
     let LoggedId = JSON.parse(window.sessionStorage.user);
     LoggedId = JSON.stringify(LoggedId.userID);
-    let following = false
+    let following = true;
     fetch('/user/getFollowing/' +LoggedId , {method: 'get'}
     ).then(response => response.json()
-    ).then(datas => {
-        for (let data of datas) {
-            let results = data.UserID;
-            if(results == id){
-                following = true
-            }
+    ).then(follows => {
+        for (let follow of follows) {
+            alert("here");
+
         }
     });
 
     let followHTML = '<div>';
-    if(following == true){
+    if(following === true){
         followHTML +=
             '<button class=UnFollow>UnFollow</button>';
     }
-    if(following == false){
+    if(following === false){
         followHTML +=
             '<button class=Follow>Follow</button>';
     }
@@ -104,7 +102,7 @@ function pageLoad(){
 
     let GenreHTML = '<table>' +
         '<tr>' +
-        '<th>Genres</th>' +
+        '<th>Genres:</th>' +
         '</tr>'
     ;
     fetch('/Genre/getByID/' +id , {method: 'get'}
@@ -126,11 +124,47 @@ function pageLoad(){
 //---------------------------------------------------------------------------------------------------------------//
 
 function Follow(){
-    pageLoad();
+    let UserID = JSON.parse(window.sessionStorage.user);
+    UserID = JSON.stringify(UserID.userID);
+    let FollowID = JSON.parse(window.sessionStorage.view);
+
+    let formData = new FormData();
+    formData.append("UserID", UserID);
+    formData.append("FollowID", FollowID);
+
+    fetch('/user/follow', {method: 'post', body: formData}
+    ).then(response => response.json()
+    ).then(responseData => {
+
+            if (responseData.hasOwnProperty('error')) {
+                alert(responseData.error);
+            } else {
+                pageLoad();
+            }
+        }
+    );
 }
 
 function UnFollow(){
-    pageLoad();
+    let UserID = JSON.parse(window.sessionStorage.user);
+    UserID = JSON.stringify(UserID.userID);
+    let FollowID = JSON.parse(window.sessionStorage.view);
+    let formData = new FormData();
+    formData.append("FollowID", FollowID);
+    formData.append("UserID", UserID);
+
+
+    fetch('/user/unFollow', {method: 'post', body: formData}
+    ).then(response => response.json()
+    ).then(responseData => {
+
+            if (responseData.hasOwnProperty('error')) {
+                alert(responseData.error);
+            } else {
+                pageLoad();
+            }
+        }
+    );
 }
 
 
