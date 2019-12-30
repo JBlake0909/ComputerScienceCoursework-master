@@ -56,20 +56,37 @@ function pageLoad(){
         }
     });
 
+    let followHTML = '<div>';
     if(following == true){
-        profileHTML +=
-            '<button id=UnFollow>UnFollow</button>';
+        followHTML +=
+            '<button class=UnFollow>UnFollow</button>';
     }
-    else{
-        profileHTML +=
-            '<button id=Follow>Follow</button>';
+    if(following == false){
+        followHTML +=
+            '<button class=Follow>Follow</button>';
+    }
+    followHTML += '</div>';
+    document.getElementById("follow").innerHTML = followHTML;
+
+    let deleteButtons = document.getElementsByClassName("Follow");
+    for (let button of deleteButtons) {
+        button.addEventListener("click", Follow);
+    }
+
+    let deleteButtons2 = document.getElementsByClassName("UnFollow");
+    for (let button of deleteButtons2) {
+        button.addEventListener("click", UnFollow);
     }
 
 
 
     //-------------------------------------------------------------------------------//
     // extract Social Links from the database and provide an interface for creation and deletion//
-    let SocialHTML = '<table>';
+    let SocialHTML = '<table>' +
+        '<tr>' +
+        '<th>Links:</th>' +
+        '</tr>'
+    ;
 
     fetch('/SocialLink/get/' +id , {method: 'get'}
     ).then(response => response.json()
@@ -85,7 +102,11 @@ function pageLoad(){
 
     });
 
-    let GenreHTML = '<table>';
+    let GenreHTML = '<table>' +
+        '<tr>' +
+        '<th>Genres</th>' +
+        '</tr>'
+    ;
     fetch('/Genre/getByID/' +id , {method: 'get'}
     ).then(response => response.json()
     ).then(genres => {
@@ -98,10 +119,18 @@ function pageLoad(){
         GenreHTML += '</table>';
         document.getElementById("Genres").innerHTML = GenreHTML;
     });
+
+
+
 }
 //---------------------------------------------------------------------------------------------------------------//
 
+function Follow(){
+    pageLoad();
+}
 
-
+function UnFollow(){
+    pageLoad();
+}
 
 
