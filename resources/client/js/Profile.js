@@ -3,7 +3,6 @@ function pageLoad(){
     //parsing the logged in userID into the new javascript function//
     let id = JSON.parse(window.sessionStorage.user);
     id = JSON.stringify(id.userID);
-    alert(id);
     // Java script to extract data from the database and display it on the users profile page//
     let profileHTML = '<div>';
     fetch('/user/display/' +id , {method: 'get'}
@@ -38,6 +37,7 @@ function pageLoad(){
                 '</p>'+
                     '<b>Email:</b>' +
                     `${user.Email}`
+
         }
         profileHTML += '</div>';
         document.getElementById("UserInfo").innerHTML = profileHTML;

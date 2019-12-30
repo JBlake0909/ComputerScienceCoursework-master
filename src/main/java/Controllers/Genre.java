@@ -91,14 +91,19 @@ public class Genre {
     @Path("getByGen/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public String filterByGenre(@PathParam("id")String Genre) {
-        System.out.println("Genre/filter");
+        System.out.println("Genre/filter/" +Genre);
         JSONArray list = new JSONArray();
         try {
-            PreparedStatement ps = Main.db.prepareStatement("select UserID, from Genres where Genre = " +Genre);
+            PreparedStatement ps = Main.db.prepareStatement("select UserID, firstName, lastName, Followers, Following from Information where UserID in(select UserID from Genres where Genre = ?)");
+            ps.setString(1, Genre);
             ResultSet results = (ps).executeQuery();
             while (results.next()) {
                 JSONObject item = new JSONObject();
                 item.put("UserID", results.getInt(1));
+                item.put("firstName", results.getString(2));
+                item.put("lastName", results.getString(3));
+                item.put("Followers", results.getInt(4));
+                item.put("Following", results.getInt(5));
                 list.add(item);
             }
             return list.toString();
