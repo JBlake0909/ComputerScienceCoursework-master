@@ -1,17 +1,8 @@
 window.onload=function(){
-    document.getElementById("GenSearchButton").addEventListener("click", SearchByGen);
-    document.getElementById("UserSearchButton").addEventListener("click", SearchByName);
-};
-
-function SearchByGen(event){
-    event.preventDefault();
     let LoggedId = JSON.parse(window.sessionStorage.user);
     LoggedId = JSON.stringify(LoggedId.userID);
-    const form = document.getElementById( "SearchGenresForm");
-    const formData = new FormData(form);
-    let id = formData.get('genres');
     let ResultsHTML = '<div>';
-    fetch('/Genre/getByGen/' +id , {method: 'get'}
+    fetch('/user/getFollowers/' +LoggedId , {method: 'get'}
     ).then(response => response.json()
     ).then(genres => {
         for (let genre of genres) {
@@ -37,7 +28,7 @@ function SearchByGen(event){
             }
             ResultsHTML += '<hr>';
         }
-        ResultsHTML += '</div>';
+        ResultsHTML +=  + '</div>';
         document.getElementById("Results").innerHTML = ResultsHTML;
 
         let viewButtons = document.getElementsByClassName("ViewProfile");
@@ -45,14 +36,7 @@ function SearchByGen(event){
             button.addEventListener("click", ViewProfile);
         }
     });
-}
-
-function SearchByName(event){
-    event.preventDefault();
-    const form = document.getElementById( "SearchUsersForm");
-    const formData = new FormData(form);
-
-}
+};
 
 function ViewProfile(event){
     let id = event.target.getAttribute("data-id");

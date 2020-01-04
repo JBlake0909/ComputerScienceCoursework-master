@@ -44,17 +44,23 @@ function pageLoad(){
 
     let LoggedId = JSON.parse(window.sessionStorage.user);
     LoggedId = JSON.stringify(LoggedId.userID);
-    let following = true;
+    alert(id);
+    let following = false;
     fetch('/user/getFollowing/' +LoggedId , {method: 'get'}
     ).then(response => response.json()
     ).then(follows => {
         for (let follow of follows) {
-            alert("here");
-
+            let result = follow.followID;
+            alert(result);
+            if(result === id) {
+                following = true
+            }
         }
     });
-
     let followHTML = '<div>';
+
+
+
     if(following === true){
         followHTML +=
             '<button class=UnFollow>UnFollow</button>';

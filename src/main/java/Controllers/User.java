@@ -135,12 +135,17 @@ public class User {
         JSONArray list = new JSONArray();
         try {
             int following = 0;
-            PreparedStatement ps = Main.db.prepareStatement("Select followID from FollowTable where UserID ="+UserID);
+            //"Select followID from FollowTable where UserID ="+UserID
+            PreparedStatement ps = Main.db.prepareStatement("select UserID, firstName, lastName, Followers, Following from Information where UserID in(Select followID from FollowTable where UserID = ?)");
+                    ps.setInt(1, UserID);
                     ResultSet results = (ps).executeQuery();
-
             while (results.next()) {
                 JSONObject item = new JSONObject();
-                item.put("followID", results.getInt(1));
+                item.put("UserID", results.getInt(1));
+                item.put("firstName", results.getString(2));
+                item.put("lastName", results.getString(3));
+                item.put("Followers", results.getInt(4));
+                item.put("Following", results.getInt(5));
                 list.add(item);
                 following++;
             }
@@ -160,12 +165,17 @@ public class User {
         JSONArray list = new JSONArray();
         try {
             int followers = 0;
-            PreparedStatement ps = Main.db.prepareStatement("Select UserID from FollowTable where followID =" +followID);
+            PreparedStatement ps = Main.db.prepareStatement("select UserID, firstName, lastName, Followers, Following from Information where UserID in(Select UserID from FollowTable where followID = ?)");
+            ps.setInt(1, followID);
             ResultSet results = (ps).executeQuery();
 
             while (results.next()) {
                 JSONObject item = new JSONObject();
-                item.put("userID", results.getInt(1));
+                item.put("UserID", results.getInt(1));
+                item.put("firstName", results.getString(2));
+                item.put("lastName", results.getString(3));
+                item.put("Followers", results.getInt(4));
+                item.put("Following", results.getInt(5));
                 list.add(item);
                 followers++;
             }
