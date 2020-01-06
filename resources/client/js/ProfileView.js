@@ -9,7 +9,6 @@ function pageLoad(){
     ).then(users => {
         for (let user of users) {
             profileHTML +=
-                '<br>'+
                 '<b>Name:</b>' +
                 ' '+
                 `${user.firstName}` +
@@ -42,6 +41,9 @@ function pageLoad(){
         document.getElementById("UserInfo").innerHTML = profileHTML;
     });
 
+
+    //creating a Follow/Unfollow Button based on whether the user is following the viewed profile
+
     let LoggedId = JSON.parse(window.sessionStorage.user);
     LoggedId = JSON.stringify(LoggedId.userID);
     alert(id);
@@ -50,22 +52,27 @@ function pageLoad(){
     ).then(response => response.json()
     ).then(follows => {
         for (let follow of follows) {
-            let result = follow.followID;
+            let result = follow.UserID;
             alert(result);
+            //Comparing the Result of the Query with the currently viewed ID,
+            // if they are the same an Unfollow Button Should be created
             if(result === id) {
                 following = true
             }
+            alert(following);
         }
     });
+
+    alert(following);
+    //Comparing the Result of the Query with the currently viewed ID,
+    // if they are the same an Unfollow Button Should be created
     let followHTML = '<div>';
-
-
-
-    if(following === true){
+    if(following == true){
         followHTML +=
-            '<button class=UnFollow>UnFollow</button>';
+           '<button class=UnFollow>UnFollow</button>';
+        alert(following);
     }
-    if(following === false){
+    if(following == false){
         followHTML +=
             '<button class=Follow>Follow</button>';
     }

@@ -1,0 +1,46 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 1.5fr 1.5fr 1fr;
+    grid-template-rows: 0.2fr 1.6fr;
+    grid-template-areas: "Banner Banner Banner" "Photos Video Audio";
+    background-color: #2196F3;
+    padding: 10px;
+}
+
+.Banner { grid-area: Banner;
+background-color: rgba(255, 255, 255, 0.8);
+border: 1px solid rgba(0, 0, 0, 0.8);
+padding: 20px;
+font-size: 30px;
+text-align: left;}
+a:link {
+    color: Black;
+}
+a:visited {
+    color: Black;
+}
+
+a:hover {
+    color: Blue;
+}
+
+.Photos { grid-area: Photos;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: left;}
+
+.Video { grid-area: Video;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: left;}
+
+.Audio { grid-area: Audio;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: left;}
