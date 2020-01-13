@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="css/Upload.css">
     <script src="js/Upload.js"></script>
 </head>
-<body>
+<body onload="pageLoad()">
 <div class="grid-container">
     <div class="Banner">
         <a href="Feed.html">
@@ -35,10 +35,52 @@
         </a>
     </div>
     <div class="Posts">
-        Upload a Post
+        <h1>Upload a Post</h1>
+        <hr/>
+        <div>
+            <form enctype="multipart/form-data" id="imageUploadForm2">
+                <b>Upload a File</b>
+                <br>
+                <input type="file" name="file" id="file" />
+                <br>
+                <div class="image2Div">
+                    <label for="Caption">Caption: </label>
+                    <input type="text" name="Caption" id="Caption">
+                </div>
+                <input type="submit"></button>
+
+                <h4 id="uploading" style="display:none">Uploading...</h4>
+
+            </form>
+
+        </div>
     </div>
     <div class="Events">
-        Upload a Event
+       <h1>Upload an Event</h1>
+        <hr/>
+        <div>
+            <form enctype="multipart/form-data" id="imageUploadForm">
+                <b>Upload a File</b>
+                <br>
+                <input type="file" name="file" id="file" />
+                <br>
+                <div class="imageDiv">
+                    <label for="Title">Title: </label>
+                    <input type="text" name="Title" id="Title">
+                </div>
+                <div class="imageDiv">
+                    <label for="Description">Description: </label>
+                    <input type="text" name="Description" id="Description">
+                </div>
+
+
+                <input type="submit"></button>
+
+                <h4 id="uploading" style="display:none">Uploading...</h4>
+
+            </form>
+
+        </div>
     </div>
 </div>
 </body>

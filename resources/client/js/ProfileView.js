@@ -46,18 +46,18 @@ function pageLoad(){
 
     let LoggedId = JSON.parse(window.sessionStorage.user);
     LoggedId = JSON.stringify(LoggedId.userID);
-    alert(id);
     let following = false;
     fetch('/user/getFollowing/' +LoggedId , {method: 'get'}
     ).then(response => response.json()
     ).then(follows => {
         for (let follow of follows) {
             let result = follow.UserID;
-            alert(result);
+            alert (result);
             //Comparing the Result of the Query with the currently viewed ID,
             // if they are the same an Unfollow Button Should be created
             if(result === id) {
-                following = true
+                following = true;
+
             }
             alert(following);
         }
