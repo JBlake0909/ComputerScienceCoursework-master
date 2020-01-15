@@ -52,42 +52,42 @@ function pageLoad(){
     ).then(follows => {
         for (let follow of follows) {
             let result = follow.UserID;
-            alert (result);
+            alert (result + " " + id);
             //Comparing the Result of the Query with the currently viewed ID,
             // if they are the same an Unfollow Button Should be created
-            if(result === id) {
+            if(result == id) {
                 following = true;
 
             }
             alert(following);
+            //Comparing the Result of the Query with the currently viewed ID,
+            // if they are the same an Unfollow Button Should be created
+            let followHTML = `<div>`;
+            if(following === true){
+                followHTML +=
+                    `<button class="UnFollow">UnFollow</button>`;
+            }
+            if(following === false){
+                followHTML +=
+                    `<button class="Follow">Follow</button>`;
+            }
+            followHTML += `</div>`;
+            alert(followHTML);
+            document.getElementById('follow').innerHTML = followHTML;
+
+            let deleteButtons = document.getElementsByClassName("Follow");
+            for (let button of deleteButtons) {
+                button.addEventListener("click", Follow);
+            }
+
+            let deleteButtons2 = document.getElementsByClassName("UnFollow");
+            for (let button of deleteButtons2) {
+                button.addEventListener("click", UnFollow);
+            }
         }
     });
 
-    alert(following);
-    //Comparing the Result of the Query with the currently viewed ID,
-    // if they are the same an Unfollow Button Should be created
-    let followHTML = '<div>';
-    if(following == true){
-        followHTML +=
-           '<button class=UnFollow>UnFollow</button>';
-        alert(following);
-    }
-    if(following == false){
-        followHTML +=
-            '<button class=Follow>Follow</button>';
-    }
-    followHTML += '</div>';
-    document.getElementById("follow").innerHTML = followHTML;
 
-    let deleteButtons = document.getElementsByClassName("Follow");
-    for (let button of deleteButtons) {
-        button.addEventListener("click", Follow);
-    }
-
-    let deleteButtons2 = document.getElementsByClassName("UnFollow");
-    for (let button of deleteButtons2) {
-        button.addEventListener("click", UnFollow);
-    }
 
 
 
