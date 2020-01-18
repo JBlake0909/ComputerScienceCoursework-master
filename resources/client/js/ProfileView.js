@@ -64,8 +64,7 @@ function pageLoad(){
     });
 
     alert(following);
-    //Comparing the Result of the Query with the currently viewed ID,
-    // if they are the same an Unfollow Button Should be created
+    //Creating the Button if Following is False
     let followHTML = '<div>';
     if(following == true){
         followHTML +=
