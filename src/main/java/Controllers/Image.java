@@ -2,16 +2,36 @@ package Controllers;
 
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.json.simple.JSONArray;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.*;
 
 @Path("image/")
 public class Image {
+
+    @GET
+    @Path("list")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String listImages() {
+
+        System.out.println("/image/list - Getting all image files from folder");
+
+        File folder = new File("resources/client/img");
+        File[] files = folder.listFiles();
+
+        JSONArray images = new JSONArray();
+
+        if (files != null) {
+            for (File file : files) {
+                images.add(file.getName());
+            }
+        }
+
+        return images.toString();
+
+    }
 
     @POST
     @Path("upload")

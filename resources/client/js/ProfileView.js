@@ -46,20 +46,21 @@ function pageLoad(){
 
     let LoggedId = JSON.parse(window.sessionStorage.user);
     LoggedId = JSON.stringify(LoggedId.userID);
-    let following = false;
+
     fetch('/user/getFollowing/' +LoggedId , {method: 'get'}
     ).then(response => response.json()
     ).then(follows => {
+        let following = false;
         for (let follow of follows) {
             let result = follow.UserID;
-            alert (result + " " + id);
+            //alert (result + " " + id);
             //Comparing the Result of the Query with the currently viewed ID,
             // if they are the same an Unfollow Button Should be created
             if(result == id) {
                 following = true;
 
             }
-            alert(following);
+            //alert(following);
             //Comparing the Result of the Query with the currently viewed ID,
             // if they are the same an Unfollow Button Should be created
             let followHTML = `<div>`;
@@ -72,7 +73,7 @@ function pageLoad(){
                     `<button class="Follow">Follow</button>`;
             }
             followHTML += `</div>`;
-            alert(followHTML);
+            //alert(followHTML);
             document.getElementById('follow').innerHTML = followHTML;
 
             let deleteButtons = document.getElementsByClassName("Follow");
@@ -165,7 +166,6 @@ function UnFollow(){
     let formData = new FormData();
     formData.append("FollowID", FollowID);
     formData.append("UserID", UserID);
-
 
     fetch('/user/unFollow', {method: 'post', body: formData}
     ).then(response => response.json()

@@ -37,29 +37,14 @@
     <div class="Posts">
         <h1>Upload a Post</h1>
         <hr/>
-        <div>
-            <form enctype="multipart/form-data" id="imageUploadForm2">
-                <b>Upload a File</b>
-                <br>
-                <input type="file" name="file" id="file" />
-                <br>
-                <div class="image2Div">
-                    <label for="Caption">Caption: </label>
-                    <input type="text" name="Caption" id="Caption">
-                </div>
-                <input type="submit"></button>
+        <a href="CreateImage.html">Images</a>
 
-                <h4 id="uploading" style="display:none">Uploading...</h4>
-
-            </form>
-
-        </div>
     </div>
     <div class="Events">
        <h1>Upload an Event</h1>
         <hr/>
         <div>
-            <form enctype="multipart/form-data" id="imageUploadForm">
+            <form enctype="multipart/form-data" id="EventImageUploadForm">
                 <b>Upload a File</b>
                 <br>
                 <input type="file" name="file" id="file" />
@@ -72,14 +57,11 @@
                     <label for="Description">Description: </label>
                     <input type="text" name="Description" id="Description">
                 </div>
-
-
-                <input type="submit"></button>
-
+                <div class="imageDiv">
+                    <input type="submit" value="Upload" id="UploadButton">
+                </div>
                 <h4 id="uploading" style="display:none">Uploading...</h4>
-
             </form>
-
         </div>
     </div>
 </div>

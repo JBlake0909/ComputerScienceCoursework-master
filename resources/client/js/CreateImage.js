@@ -1,11 +1,11 @@
 function pageLoad() {
     /* Add this to the end of pageLoad function if your function already has code in it! */
-    document.getElementById("EventImageUploadForm").addEventListener("submit", uploadImageEvent);
+    document.getElementById("PostImageUploadForm").addEventListener("submit", uploadImagePost);
 }
 
-function uploadImageEvent(event) {
+function uploadImagePost(event){
     event.preventDefault();
-    const imageUploadForm = document.getElementById('EventImageUploadForm');
+    const imageUploadForm = document.getElementById('PostImageUploadForm');
     if (document.getElementById('file').value !== '') {
         imageUploadForm.style.display = 'none';
         document.getElementById('uploading').style.display = 'block';
@@ -23,10 +23,10 @@ function uploadImageEvent(event) {
             }
         );
 
-        //placing data into events table
+        //placing data into Posts table
 
-        let Title = fileData.get("Title");
-        let Description = fileData.get("Description");
+
+        let Caption = fileData.get("Caption");
         let file = fileData.get("file");
         let ImageReference = file.name;
 
@@ -35,16 +35,20 @@ function uploadImageEvent(event) {
         id = JSON.stringify(id.userID);
         let formData = new FormData();
         formData.append("UserID", id);
-        formData.append("Title", Title);
-        formData.append("Description", Description);
-        formData.append("ImageReference", ImageReference);
-        fetch('/Event/create', {method: 'post', body: formData}
+        formData.append("Type", "image");
+        formData.append("FileReference", ImageReference);
+        formData.append("DateAdded", "18/01/2020");
+        formData.append("Caption", Caption);
+
+        alert("here");
+
+        fetch('/Post/create', {method: 'post', body: formData}
         ).then(response => response.json()
         ).then(responseData => {
                 if (responseData.hasOwnProperty('error')) {
                     alert(responseData.error);
                 } else {
-                    window.location.href = 'Events.html';
+                    window.location.href = 'Profile.html';
                 }
             }
         );
@@ -53,5 +57,3 @@ function uploadImageEvent(event) {
         alert('No file specified');
     }
 }
-
-

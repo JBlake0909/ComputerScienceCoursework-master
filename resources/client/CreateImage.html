@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/CreateImage.js"></script>
+</head>
+<body onload="pageLoad()">
+<div>
+    <form enctype="multipart/form-data" id="PostImageUploadForm">
+        <b>Upload a File</b>
+        <br>
+        <input type="file" name="file" id="file" />
+        <br>
+        <div class="imageDiv2">
+            <label for="Caption">Caption: </label>
+            <input type="text" name="Caption" id="Caption">
+        </div>
+        <div class="imageDiv2">
+            <input type="submit" value="Upload" id="UploadButton">
+        </div>
+        <h4 id="uploading" style="display:none">Uploading...</h4>
+    </form>
+</div>
+</body>
+</html>
