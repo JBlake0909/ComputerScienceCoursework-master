@@ -33,6 +33,30 @@ public class Image {
 
     }
 
+    @GET
+    @Path("getByName")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getImages(@FormDataParam("fileName") String fileName) {
+
+        System.out.println("/image/get "+fileName);
+
+        File folder = new File("resources/client/img/"+fileName);
+        File[] files = folder.listFiles();
+
+        JSONArray images = new JSONArray();
+
+        if (files != null) {
+            for (File file : files) {
+                images.add(file.getName());
+            }
+        }
+
+        return images.toString();
+
+    }
+
+
+
     @POST
     @Path("upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
