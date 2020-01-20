@@ -93,6 +93,32 @@ public class Event {
         }
     }
 
+
+    @GET
+    @Path("getByUserID/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getEventByUserID(@PathParam("id")int UserID) {
+        System.out.println("event/getByUserID");
+        JSONArray list = new JSONArray();
+        try {
+            PreparedStatement ps = Main.db.prepareStatement("select EventID, Title, Description, ImageReference, UserID from Events where UserID = "+UserID);
+            ResultSet results = (ps).executeQuery();
+
+            while (results.next()) {
+                JSONObject item = new JSONObject();
+                item.put("EventID", results.getInt(1));
+                item.put("Title", results.getString(2));
+                item.put("Description", results.getString(3));
+                item.put("ImageReference", results.getString(4));
+                item.put("UserID", results.getInt(5));
+                list.add(item);
+            }
+            return list.toString();
+        } catch (Exception exception) {
+            System.out.println("Database error: " + exception.getMessage());
+            return "{\"error\": \"Unable to list items, please see server console for more info.\"}";
+        }
+    }
 }
 
 

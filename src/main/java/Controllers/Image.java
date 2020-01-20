@@ -11,52 +11,6 @@ import java.io.*;
 @Path("image/")
 public class Image {
 
-    @GET
-    @Path("list")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String listImages() {
-
-        System.out.println("/image/list - Getting all image files from folder");
-
-        File folder = new File("resources/client/img");
-        File[] files = folder.listFiles();
-
-        JSONArray images = new JSONArray();
-
-        if (files != null) {
-            for (File file : files) {
-                images.add(file.getName());
-            }
-        }
-
-        return images.toString();
-
-    }
-
-    @GET
-    @Path("/getByName/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getImages(@PathParam("id") String fileName) {
-
-        System.out.println("/image/getByName/"+fileName);
-
-        File folder = new File("resources/client/img/"+fileName);
-        File[] files = folder.listFiles();
-
-        JSONArray images = new JSONArray();
-
-        if (files != null) {
-            for (File file : files) {
-                images.add(file.getName());
-            }
-        }
-
-        return images.toString();
-
-    }
-
-
-
     @POST
     @Path("upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
