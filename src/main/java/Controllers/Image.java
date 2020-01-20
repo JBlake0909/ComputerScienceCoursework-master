@@ -38,7 +38,7 @@ public class Image {
     @Produces(MediaType.APPLICATION_JSON)
     public String getImages(@FormDataParam("fileName") String fileName) {
 
-        System.out.println("/image/get "+fileName);
+        System.out.println("/image/getByName/"+fileName);
 
         File folder = new File("resources/client/img/"+fileName);
         File[] files = folder.listFiles();
