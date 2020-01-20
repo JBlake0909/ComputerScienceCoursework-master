@@ -96,4 +96,31 @@ public class Post {
         }
     }
 
+    @GET
+    @Path("getByUserID/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getPostByUserID(@PathParam("id")int UserID) {
+        System.out.println("post/get");
+        JSONArray list = new JSONArray();
+        try {
+            PreparedStatement ps = Main.db.prepareStatement("select PostID, Type, FileReference, DateAdded, UserID, Caption from posts where UserID = "+UserID);
+            ResultSet results = (ps).executeQuery();
+
+            while (results.next()) {
+                JSONObject item = new JSONObject();
+                item.put("PostID", results.getInt(1));
+                item.put("Type", results.getString(2));
+                item.put("FileReference", results.getString(3));
+                item.put("DateAdded", results.getString(4));
+                item.put("UserID", results.getInt(5));
+                item.put("Caption", results.getString(6));
+                list.add(item);
+            }
+            return list.toString();
+        } catch (Exception exception) {
+            System.out.println("Database error: " + exception.getMessage());
+            return "{\"error\": \"Unable to list items, please see server console for more info.\"}";
+        }
+    }
+
 }

@@ -34,9 +34,9 @@ public class Image {
     }
 
     @GET
-    @Path("getByName")
+    @Path("/getByName/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getImages(@FormDataParam("fileName") String fileName) {
+    public String getImages(@PathParam("id") String fileName) {
 
         System.out.println("/image/get "+fileName);
 
