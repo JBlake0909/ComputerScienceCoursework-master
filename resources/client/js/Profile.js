@@ -1,3 +1,5 @@
+let imageList = [];
+let pageSize = 5;    // Change this as desired.
 
 function pageLoad(){
     //parsing the logged in userID into the new javascript function//
@@ -42,7 +44,6 @@ function pageLoad(){
         profileHTML += '</div>';
         document.getElementById("UserInfo").innerHTML = profileHTML;
 
-        document.getElementById("updateUser").addEventListener("click", updateUser)
     });
     //-------------------------------------------------------------------------------//
     // extract Social Links from the database and provide an interface for creation and deletion//
@@ -105,6 +106,51 @@ function pageLoad(){
 
         document.getElementById("createGenre").addEventListener("click", createGenre)
     });
+
+    //getting posts and displaying them on the profile page.
+
+    let ImageHTML = '<table>' +
+        '<tr>' +
+        '<th>Posts</th>' +
+        '</tr>'
+    ;
+
+    //getting the Post from
+
+    fetch('/Post/getByUserID/' +id , {method: 'get'}
+    ).then(response => response.json()
+    ).then(posts => {
+        for(let post of posts){
+            ImageHTML+=
+                `<tr>`;
+                //Extracting the Image from the server //
+
+            let FileReference = "TestImage.png";
+            fetch('/image/getByName/' +FileReference, {method: 'get'},
+            ).then(response => response.json()
+            ).then(images => {
+                if (images.hasOwnProperty('error')) {
+                    alert(images.error);
+                } else {
+                    imageList = images;
+                    displayThumbnails(0);
+                }
+            });
+
+
+            ImageHTML+=`</tr>`;
+            ImageHTML+=
+                `<tr>`+
+                `<td>Date Added: ${post.DateAdded}</td>`+
+                `<td>Caption: ${post.Caption}</td>`+
+                `</tr>`;
+
+            ImageHTML += '</table>';
+            document.getElementById("Posts").innerHTML = ImageHTML;
+
+        }
+    });
+
     }
 //---------------------------------------------------------------------------------------------------------------//
 
@@ -210,3 +256,34 @@ function deleteGenre(event) {
 }
 //-------------------------------------------------------------------------//
 
+function displayThumbnails(startIndex) {
+
+    imagesHTML = '';
+
+    let counter = 0;
+    for (let image of imageList) {
+        if (counter >= startIndex && counter < startIndex + pageSize) {
+            imagesHTML += `<div style="display: inline-block; width: 120px; text-align: center; border: solid 1px black; margin:10px; padding:10px;">`;
+            imagesHTML += `<a href="/client/img/${image}" target="_blank">`;
+            imagesHTML += `<img src="/client/img/${image}" width="100px" alt="${image}">`;
+            imagesHTML += `</a>`;
+            imagesHTML += `</div>`;
+        }
+        counter++;
+    }
+
+    imagesHTML += `<div style="margin-bottom: 32px; padding-bottom: 16px; border-bottom: solid 3px silver; text-align: center">Page `;
+
+    let n  = 0;
+    while (n < imageList.length) {
+        let style = '';
+        if (startIndex === n) {
+            style = 'background-color: yellow';
+        }
+        imagesHTML += `<button style="${style}" onclick="displayThumbnails(${n})">${Math.floor(n/pageSize)+1}</button> `;
+        n += pageSize;
+    }
+
+    imagesHTML += `</div>`;
+
+}
